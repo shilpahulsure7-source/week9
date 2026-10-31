@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inbox</title>
+</head>
+<body>
+
+    <h1>My Inbox</h1>
+
+    <p>Welcome, {{ request.user.username }}!</p>
+
+    <a href="{% url 'compose' %}">Compose Mail</a> |
+    <a href="{% url 'logout' %}">Logout</a>
+
+    <hr>
+
+    {% if mails %}
+        {% for mail in mails %}
+            <h3>{{ mail.subject }}</h3>
+            <p><strong>From:</strong> {{ mail.sender }}</p>
+            <p><strong>To:</strong> {{ mail.recipient }}</p>
+            <p><strong>Date:</strong> {{ mail.timestamp }}</p>
+            <p>{{ mail.body }}</p>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <p>Your inbox is empty. Click Compose Mail to send a message.</p>
+    {% endif %}
+
+</body>
+</html>
